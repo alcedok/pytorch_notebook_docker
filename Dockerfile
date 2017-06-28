@@ -66,10 +66,7 @@ VOLUME /home/$DEFAULT_USER/notebooks/
 WORKDIR /home/$DEFAULT_USER
 
 # Get Sony tutorial directory 
-RUN git init && \
-    git remote add examples https://github.com/pytorch/examples.git && \
-    git fetch examples && \
-    git checkout examples/master
+RUN git clone https://github.com/pytorch/examples.git
 
 # run jupyter notebook
 CMD jupyter notebook --no-browser --ip=0.0.0.0 --NotebookApp.token='hellofriend'
