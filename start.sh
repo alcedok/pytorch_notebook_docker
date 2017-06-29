@@ -50,7 +50,7 @@ case ${command} in
 	ssh)
 	echo "ssh into machine"
 	image_name=$(docker ps --filter ancestor=pytorch_jupyter:latest --format "{{.Names}}")
-	docker exec -i -t $image_name bin/bash
+	docker exec -i -t $image_name /bin/bash
 	;;
 	*) 
 	echo "invalid command. use -h to see available commands "
