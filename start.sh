@@ -6,7 +6,7 @@ set -e
 # Make sure there are the current number of inputs
 nargs="$#"
 # If there are no arguments display options
-if [ ${nargs} -lt 1]; then
+if [ ${nargs} -ne 1 ]; then
 	echo "bash start.sh [option] <command>"
 	echo "error: incorrect number of commands"
 	echo "use -h to see available commands"
