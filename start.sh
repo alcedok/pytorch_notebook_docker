@@ -6,7 +6,7 @@ set -e
 # Make sure there are the current number of inputs
 nargs="$#"
 # If there are no arguments display options
-if [ ${nargs} -ne 1 ]; then
+if [ ${nargs} -lt 1]; then
 	echo "bash start.sh [option] <command>"
 	echo "error: incorrect number of commands"
 	echo "use -h to see available commands"
@@ -20,6 +20,7 @@ while getopts ":h" opt; do
 		echo "commands:"
 		echo "	local"
 		echo "	pull"
+		echo "	ssh"
 		exit 1
 			;;
 		*) 
@@ -46,7 +47,11 @@ case ${command} in
 	echo "Pull from DockerHub and run"
 	echo "Oh wait...This feature is not ready yet, sorry" 
 	;;
-
+	ssh)
+	echo "ssh into machine"
+	image_name=$(docker ps --filter ancestor=pytorch_jupyter:latest --format "{{.Names}}")
+	docker exec -i -t image_name bin/bash
+	;;
 	*) 
 	echo "invalid command. use -h to see available commands "
 	exit 1
