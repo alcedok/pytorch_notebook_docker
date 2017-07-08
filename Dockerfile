@@ -26,9 +26,9 @@ EXPOSE 8888
 
 ## Create default user and home directory
 RUN useradd --create-home --home-dir /home/$DEFAULT_USER --shell /bin/bash $DEFAULT_USER && \
-	adduser $DEFAULT_USER sudo && \
-	mkdir -p $CONDA && \
-	chown $DEFAULT_USER $CONDA
+    adduser $DEFAULT_USER sudo && \
+    mkdir -p $CONDA && \
+    chown $DEFAULT_USER $CONDA
 
 ## Install Python
 RUN apt update && apt install -y python3-pip python-dev ipython ipython-notebook && apt clean
@@ -45,15 +45,15 @@ RUN cd /tmp && \
     rm Miniconda3-latest-Linux-x86_64.sh && \
     $CONDA/bin/conda config --system --add channels conda-forge && \
     $CONDA/bin/conda config --system --set auto_update_conda false && \
-	conda install --quiet --yes conda-build && \
+    conda install --quiet --yes conda-build && \
     conda clean -tipsy
 
 # Install Jupyter Notebook
 RUN conda install --quiet --yes 'notebook=4.3*' && \
-	conda clean -tipsy
+    conda clean -tipsy
 
-# Install scikit-learn
-RUN conda install --quiet --yes scikit-learn && \
+# Install scikit-learn and matplotlib and cycler 
+RUN conda install --quiet --yes scikit-learn matplotlib cycler&& \
     conda clean -tipsy
 
 # Install pytorch
